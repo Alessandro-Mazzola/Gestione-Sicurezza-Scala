@@ -2,7 +2,7 @@ package Dispositivo
 import Posizione._
 
 // costruttore con default argument
-class Telecamera(n: String, c: String, val posizione: Posizione, val proprietario: String = "Nessuno") extends DispositivoSicurezza(n, c) with getInfoClasse {
+class Telecamera(n: String, c: String, val posizione: Posizione, val proprietario: String = "Nessuno") extends DispositivoSicurezza(n, c){
 
   override def getNomeClasse(): String = "Telecamera"
   override def getTipo: Char = 't'

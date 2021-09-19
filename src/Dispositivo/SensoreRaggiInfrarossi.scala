@@ -1,8 +1,10 @@
 package Dispositivo
 
-class SensoreRaggiInfrarossi(n: String, c: String, val copertura: Double) extends DispositivoSicurezza(n, c) with getInfoClasse {
+class SensoreRaggiInfrarossi(n: String, c: String, val copertura: Double) extends DispositivoSicurezza(n, c){
 
-
+  //overload del costruttore
+  def this(n: String, c: String) = this(n,c,20.0)
+  
   override def getNomeClasse: String = "SensoreRaggInfrarossi"
   override def getTipo: Char = 's'
 
