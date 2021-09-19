@@ -1,0 +1,5 @@
+package gestoreDispositivo
+
+class gestoreDispositivo {
+  
+}
