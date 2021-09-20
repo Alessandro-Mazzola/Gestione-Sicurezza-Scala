@@ -20,7 +20,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-    throw DispositivoNotFound()
+      throw new DispositivoNotFound
   }
 
   def accendiDispositivo(s: String) = {
@@ -33,7 +33,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      throw DispositivoNotFound()
+      throw new DispositivoNotFound
   }
 
   def spegniDispositivo(s: String) = {
@@ -46,7 +46,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      throw DispositivoNotFound()
+      throw new DispositivoNotFound
   }
 
   def segnalaMovimento(s: String) = {
@@ -59,7 +59,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      throw DispositivoNotFound()
+      throw new DispositivoNotFound
   }
 
   def spegniDispositivi = {
@@ -92,7 +92,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      throw DispositivoNotFound()
+      throw new DispositivoNotFound
   }
 }
 

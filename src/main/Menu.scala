@@ -1,8 +1,9 @@
 package main
 import gestoreDispositivo._
+import Exceptions._
 import Dispositivo._
 
-class Menu {
+object Menu {
   def showMenu = {
 
     var next = true
@@ -24,43 +25,62 @@ class Menu {
       print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n")
 
       print("\nInserisci la tua scelta\n")
-      val name = scala.io.StdIn.readLine()
+      val name = scala.io.StdIn.readInt()
       name match {
-        case "0" => next = false
-        case "1" => caso1
-        case "2" => {
+        case 0 => next = false
+        case 1 => caso1
+        case 2 => {
           print("Inserire ID del dispositivo da rimuovere (se non si ricorda l'ID faccia prima una stampa) :\n ")
           val temp = scala.io.StdIn.readLine()
-          gestoreDispositivo.rimuoviDispositivo(temp)
+          try {
+            gestoreDispositivo.rimuoviDispositivo(temp)
+          } catch {
+            case e: DispositivoNotFound => println("***dispositivo non presente***")
+          }
         }
-        case "3" => gestoreDispositivo.stampaDispositiviTotali
-        case "4" => gestoreDispositivo.stampaDispositiviAccesi
-        case "5" => {
+        case 3 => gestoreDispositivo.stampaDispositiviTotali
+        case 4 => gestoreDispositivo.stampaDispositiviAccesi
+        case 5 => {
           print("Inserire ID del dispositivo da accendere (se non si ricorda l'ID faccia prima una stampa) :\n ")
           val temp = scala.io.StdIn.readLine()
-          gestoreDispositivo.accendiDispositivo(temp)
+          try {
+            gestoreDispositivo.accendiDispositivo(temp)
+          } catch {
+            case e: DispositivoNotFound => println("***dispositivo non presente o già acceso***")
+          }
         }
-        case "6" => {
+        case 6 => {
           print("Inserire ID del dispositivo da spegnere (se non si ricorda l'ID faccia prima una stampa) :\n ")
           val temp = scala.io.StdIn.readLine()
-          gestoreDispositivo.spegniDispositivo(temp)
+          try {
+            gestoreDispositivo.spegniDispositivo(temp)
+          } catch {
+            case e: DispositivoNotFound => println("***dispositivo non presente o già spento***")
+          }
         }
-        case "7" => {
+        case 7 => {
           print("Spengo tutti i dispositivi...\n")
           gestoreDispositivo.spegniDispositivi
         }
-        case "8" => {
+        case 8 => {
           print("Quale dispositivo vuoi simulare?(se non si ricorda l'ID faccia prima una stampa)\n")
           val temp = scala.io.StdIn.readLine()
-          gestoreDispositivo.segnalaMovimento(temp)
-
+          try {
+            gestoreDispositivo.segnalaMovimento(temp)
+          } catch {
+            case e: DispositivoNotFound => println("***dispositivo non presente***")
+          }
         }
-        case "9" => {
+        case 9 => {
           print("Quale allarme vuoi simulare? (se non si ricorda l'ID faccia prima una stampa)\n")
           val temp = scala.io.StdIn.readLine()
-          gestoreDispositivo.AemettiSuono(temp)
+          try {
+            gestoreDispositivo.AemettiSuono(temp)
+          } catch {
+            case e: DispositivoNotFound => println("***dispositivo non presente***")
+          }
         }
-        case "10" => {
+        case 10 => {
           var a: DispositivoSicurezza = new Allarme("Allarme1", "cucina", "Alessandro")
           var s: DispositivoSicurezza = new SensoreRaggiInfrarossi("Sensore1", "box", 20.0)
           var t: DispositivoSicurezza = new Telecamera("TelecameraMobile", "sala", Posizione.Nord)
@@ -73,8 +93,8 @@ class Menu {
     }
   }
 
-  def caso1 = {
-    print("Inserire tipo di dispositivo (s: Sensore, a: Allarme, t Telecamera, p TelecameraAllarmata:\n ")
+  private def caso1 = {
+    print("Inserire tipo di dispositivo (s: Sensore, a: Allarme, t Telecamera, p TelecameraAllarmata):\n ")
     val tipo = scala.io.StdIn.readLine()
     tipo match {
       case "s" => {
