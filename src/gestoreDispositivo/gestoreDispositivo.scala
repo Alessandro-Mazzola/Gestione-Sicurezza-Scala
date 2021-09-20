@@ -1,5 +1,6 @@
 package gestoreDispositivo
 import Dispositivo._
+import Exceptions._
 import scala.collection.mutable._
 
 object gestoreDispositivo {
@@ -19,7 +20,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      printf("\n**Errore: dispositivo non trovato**\n")
+    throw DispositivoNotFound()
   }
 
   def accendiDispositivo(s: String) = {
@@ -32,7 +33,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      printf("\n**Errore: dispositivo non trovato**\n")
+      throw DispositivoNotFound()
   }
 
   def spegniDispositivo(s: String) = {
@@ -45,7 +46,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      printf("\n**Errore: dispositivo non trovato**\n")
+      throw DispositivoNotFound()
   }
 
   def segnalaMovimento(s: String) = {
@@ -58,7 +59,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      printf("\n**Errore: dispositivo non trovato**\n")
+      throw DispositivoNotFound()
   }
 
   def spegniDispositivi = {
@@ -80,7 +81,7 @@ object gestoreDispositivo {
     lista.foreach(temp)
   }
 
-  def AemettiSuono(s:String) = {
+  def AemettiSuono(s: String) = {
     var verifica: Boolean = false
     def temp(x: DispositivoSicurezza) = {
       if (x.ID == s && x.statoDispositivo == true && x.isInstanceOf[Allarme]) {
@@ -91,6 +92,7 @@ object gestoreDispositivo {
     }
     lista.foreach(temp)
     if (verifica == false)
-      printf("\n**Errore: dispositivo non trovato**\n")
+      throw DispositivoNotFound()
   }
 }
+
